@@ -8,6 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import kotlin.random.Random
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
+import android.graphics.Color
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +25,16 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"Button Clicked", Toast.LENGTH_SHORT).show()
         }
         */
+
+        val colorAnim = ObjectAnimator.ofObject(rollButton, "backgroundColor", ArgbEvaluator(),
+            Color.RED, Color.BLUE)
+        colorAnim.duration = 3000 // animation will take 3 sec
+        colorAnim.repeatCount = ObjectAnimator.INFINITE
+        colorAnim.repeatMode = ObjectAnimator.REVERSE
+
+        // Start the animation when the button is clicked
         rollButton.setOnClickListener {
+            colorAnim.start()
             rollDice()
         }
     }
